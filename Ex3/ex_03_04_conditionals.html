@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>ex3-04</title>
+    </head>
+<body>
+
+    <h2>JavaScript Flow Controls: Computer Time</h2>
+    <p id="happy_day"></p>
+    <p id="good_night"></p>
+    <p id="good_all"></p>
+<p id ="day_hour"></p>
+  
+  
+    <script>
+      var hour = new Date().getHours(); // 0 to 23
+      var greeting;
+      
+
+      // Fix: add an else so greeting is always defined
+      if (hour < 18) {
+        greeting = "Happy day!";
+      } else {
+        greeting = "Good evening!";
+      }
+      
+      
+      document.getElementById("happy_day").innerHTML = greeting;
+      document.getElementById("day_hour").innerHTML = hour;
+
+      if (hour < 10) {
+        greeting = "Happy day!";
+      } else {
+        greeting = "Its after 10am!";
+      }
+      document.getElementById("good_night").innerHTML = greeting;
+
+      if (hour < 12) {
+        greeting = "Hope you didn't sleep in!";
+      } else if (hour < 18) {
+        greeting = "Its the middle of the day!";
+      } else {
+        greeting = "Eat some supper!";
+      }
+      document.getElementById("good_all").innerHTML = greeting;
+    </script>
+
+
+</body>
+</html>

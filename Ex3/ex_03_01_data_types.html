@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>ex3-01</title>
+    </head>
+<body>
+
+    <h2>Assigning JavaScript Values</h2>
+
+    <p>In JavaScript the = operator is used to assign values to variables.</p>
+
+    <p id="add"></p>
+    <p id="add1"></p>
+    <p id="sub"></p>
+    <p id="mult1"></p>
+    <p id="mult2"></p>
+    <p id="incree"></p>
+    <p id="decree"></p>
+    <p id="concata"></p>
+    <p id="list"></p>
+    <p id ="list1"></p>
+    <p id="bool"></p>
+    <p id="hello"></p>
+
+    
+    <script> //javascript starts here //
+        var x = 9;
+        var y = 6;
+        document.getElementById("add").innerHTML = x + x; //"add" id will return the calculation from script to the html document where "add" is used within <p> tag
+        document.getElementById("sub").innerHTML = y - y;
+        document.getElementById("mult1").innerHTML = x * y;
+        document.getElementById("mult2").innerHTML = x * 10;
+        document.getElementById("add1").innerHTML = x + 12;
+        
+        var z = 14
+        z++;
+        document.getElementById("incree").innerHTML = z;
+        
+        z--;
+        document.getElementById("decree").innerHTML = z;
+
+        var s1 = "Andrew";
+        var s2 = "Sayles";
+        document.getElementById("concata").innerHTML = s1 +" "+ s2;
+
+        var list = "<ul>";
+        list += "<li>Water</li>";
+        list += "<li>Shoes</li>";
+        list += "<li>Hat</li>";
+        list += "<li>Eggs</li>"
+        list += "<li>Bread</li>"
+        list += "</ul>";
+        
+        var val1= 16;
+        var val2 = 18;
+        
+        document.getElementById("list").innerHTML = list; // returns all values in the list
+        document.getElementById("bool").innerHTML = val1 > val2;
+        
+       
+        var list1 = "<ul>";
+        list1 += "<li>soap</li>";
+        list1 += "<li>shirt</li>";
+        list1 += "</ul>";
+         document.getElementById("list1").innerHTML = list1;
+        
+        
+        var hello = "this is some <b>text</b>"
+            document.getElementById("hello").innerHTML = hello;
+        
+    </script>
+
+</body>
+</html>

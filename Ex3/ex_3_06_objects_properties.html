@@ -1,0 +1,37 @@
+<html lang="en">
+    <head>
+    <title>ex3-06</title>
+    </head>
+  <body>
+<h2>JS Objects: Properties + Methods</h2>
+<p id="out"></p>
+
+<script>
+  // An object with PROPERTIES (data) and METHODS (functions)
+  const student = {
+    name: "Andrew",          // property
+    major: "Biology",    // property
+    credits: 120,           // property
+
+    // method (uses properties via "this")
+    intro() {
+      return `Hi, I'm ${this.name}. I'm majoring in ${this.major}.`;
+    },
+
+    // method that changes a property
+    addCredits(amount) {
+      this.credits += amount;
+      return this.credits;
+    }
+  };
+
+  const msg = [
+    `Property example: ${student.name}`,
+    `Method example: ${student.intro()} Currently, I have ${student.credits} credits`,
+    `Method changes property: Next semester I will have ${student.addCredits(15)} credits`
+  ].join("<br>");
+
+  document.getElementById("out").innerHTML = msg;
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>ex3-05</title>
+    </head>
+<body>
+
+<h2>JavaScript For Loop</h2>
+
+<p id="demo"></p>
+<p id="demo1"></p>
+    <p>this count ended at <b>3</b></p>
+    <br>
+    <br>
+    <p>Here is a list of cars</p>
+<p id="demo2"></p>
+
+<script>
+    var num = "";
+    
+    for (var i = 15; i < 30; i++) { // change to a different number
+        num += "The number is " + i + "<br>";
+    }
+    document.getElementById("demo").innerHTML = num;
+    
+    var num_brk = "";
+    
+    for (var z = 12; z > 0; z--) {
+        if(z===2) {break;}
+        num_brk += "The number is " + z + " lets loop again" + "<br>";
+    }
+    document.getElementById("demo1").innerHTML = num_brk;
+    
+    
+    var cars = ["Tesla", "Volvo", "chevy", "Ford", "Fiat", "Audi"];
+    
+    var carnames = "";
+    
+    for (var j = 0; j < cars.length; j++) {
+        carnames += cars[j] + "<br>";
+    }
+    document.getElementById("demo2").innerHTML = carnames;
+
+</script>
+
+
+</body>
+</html>
