@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GEO 455: Lab 2</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  
+  <!-- Make sure you put the leaflet map library AFTER Leaflet's CSS --> 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <!--Your choice of Google fonts- make sure to update in CSS file -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="geo455_lab3.css" />
+</head>
+  
+<body>
+  <h1 id="title">Lab 3: Favorite Parks and Destinations</h1>
+
+  <div id="description">
+    <h2>Locations</h2>
+     <ol>
+     <li>White Water State Park, Minnesota</li>
+     <li>Lake Bemidji State Park, Minnesota</li>
+     <li>Agate Lake, Minnesota</li>
+     <li>Deer Lake, Minnesota</li>
+     <li>Devils Lake, Wisconsin</li>
+     <li>Goose Island, Wisconsin</li>
+     <li>Cave Point, Wisconsin</li>
+     <li>Two Creeks Buried Forest, Wisconsin</li>
+     <li>Cana Island Lighthouse, Wisconsin</li>
+      <li>Silver Lake, Iowa</li>
+     </ol>
+      <img src="images/locations/edit_photo.jpg"  width="200px">
+     <p>Photo Credits: Andrew Sayles (2025)</p>
+  </div>
+  <div id="map"></div>
+  
+  <div id="footer">
+    <footer>
+      <p>Map Authored by Andrew Sayles -------- <a href="../index.html">Back Home</a> </p>
+  </footer>
+  </div>
+  
+    <!-- Your map code  -->
+  <script src="lab3_map.js"></script>
+  
+</body>
+</html>

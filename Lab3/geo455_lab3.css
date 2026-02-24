@@ -1,0 +1,77 @@
+/* Page + full-screen map - Make the page tall enough for a full-screen map*/
+html, body {
+  height: 100%;
+}
+
+
+/* Basic styling for the whole page */
+body {
+  margin: 0;
+  background-color: whitesmoke;
+  font-family: "lato", sans-serif;
+  color: #3d3d3d;
+}
+
+/* Make the map fill the entire browser window */
+#map {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+}
+
+/*Style the title panel (overlay box)*/
+#title {
+  position: fixed;
+  top: 10px;
+  left: 55px;
+  font-size: 2em;
+  font-family: "lato", serif;
+  letter-spacing: 0.01em;
+  margin: 0;
+    margin-right: 0;
+  padding: 5px 20px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid #777;
+  border-radius: 29px;
+  z-index: 800
+}
+
+#footer {
+position:fixed;
+  bottom: 5px;
+  right: 0;
+  font-size: 1em;
+  font-family: "lato", serif;
+  letter-spacing: 0.01em;
+  margin: 0;
+    margin-right: 0;
+  padding: 5px 602px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid #777;
+  border-radius: 29px;
+  z-index: 915
+}
+
+
+
+/*Style the description panel (overlay box)*/
+#description {
+  font-style: italic;
+  position: fixed;
+  left: 10px;
+  bottom: 9px;
+  width: 307px;
+    height: auto;
+  max-width: calc(100vw - 20px);
+  padding: 0 9px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid #777;
+  border-radius: 6px;
+  z-index: 800;
+}
+
+/*Make paragraph text inside the description readable */
+#description p {
+  font-size: 0.75rem;
+    color: black;
+  line-height: 1;
+}
