@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Event object</title>
+    </head>
+    <body>
+        <p id="position"></p>
+        
+         <img id="myImage2" src="images/Earth_flat.jpg" width = 800><br>
+        <script>
+            var page_coord = document.getElementById("position");
+            document.addEventListener("mousemove", function(e) {
+                page_coord.innerHTML = e.pageX + " " + e.pageY;
+            });
+        </script>
+    </body>
+</html>

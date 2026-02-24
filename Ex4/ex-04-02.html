@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Earth poles</title>
+    </head>
+    <body>
+        <h2>Earth Poles Viewer</h2>
+        <img id="myImage" src="images/North_pole.jpg" width = 500><br>
+        <input type="button" value="North Pole" id="north"> <!-- event listener -->
+        <input type="button" value="South Pole" id="south"> <!-- event listener -->
+        
+        
+        <br>
+        <br>
+        <p> Earth Projection</p>
+        <img id="myImage2" src="images/Earth_flat.jpg" width = 500><br>
+        
+        <script>
+            function showNorth() {              //event listeners function
+                document
+                    .getElementById("myImage")
+                    .src = "images/North_pole.jpg"
+            }
+            function showSouth() {              //event listeners function
+                document
+                    .getElementById("myImage")
+                    .src = "images/South_pole.jpg";
+            }
+            document
+                .getElementById("north")
+                .addEventListener("click", showNorth);  //fetching the function
+            document
+                .getElementById("south")
+                .addEventListener("click", showSouth);  //fetching the function
+        </script>
+    </body>
+</html>
+
