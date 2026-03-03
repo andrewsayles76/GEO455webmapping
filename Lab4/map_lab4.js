@@ -14,7 +14,7 @@ var topo = L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
 var map = L.map("map", {
   center: [6.794952075439587, 20.91148703911037],
   zoom: 3,
-  layers: [streets, imagery, topo]
+  layers: imagery
 });
 
 var homeCenter = map.getCenter();
