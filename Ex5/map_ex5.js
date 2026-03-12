@@ -14,12 +14,8 @@ var map = L.map("map", {
 });
 
 /* Locate control */
-L.control.locate({
-  position: "topleft",
-  flyTo: true,
-  keepCurrentZoomLevel: false,
-  showCompass: true
-}).addTo(map);
+L.control.locate().addTo(map);
+
 
 /* Measure tool */
 var measureControl = new L.Control.Measure({
@@ -247,3 +243,4 @@ var miniMap = new L.Control.MiniMap(miniLayer, {
   minimized: false,
   position: "bottomleft"
 }).addTo(map);
+
