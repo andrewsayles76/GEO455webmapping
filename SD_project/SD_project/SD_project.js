@@ -135,7 +135,7 @@ L.geoJSON(plots, {
     layer.bindTooltip(feature.properties.name);
 
     layer.on("click", function(e) {
-      map.flyTo(e.latlng, 12);
+      map.flyTo(e.latlng, 18);
     });
 
   }
