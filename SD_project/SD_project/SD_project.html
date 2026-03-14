@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SD Answer Plots</title>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- Locate Control plugin -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
+  
+  
+  <!--Your choice of Google fonts- make sure to update in CSS file -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+   
+ 
+   
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="SD_project.css" />
+</head>
+  
+<body>
+  <h1 id="title">South Dakota Answer Plots</h1>
+  <div id="map"></div>
+
+  <div id="description">
+    <h2>Description</h2>
+    
+     <p>This is my rough draft webpage that (if I can) I will use for my summer SRT project. Here are some of the things I plan on doing
+       <ul> 
+         <li>Have pins at each Answer Plot</li>
+         <li>Click/tap on the pins I will zoom into Answer Plots</li>
+         <li>Answer Plot locations will show bird eyes view of the crops with a simplified treatment/showcase overlay (with text labels)</li>
+         <li>I plan on also having an optional NDVI view of the field (from drone flights)</li>
+         <li>There is an optional “user location" so someone can see where they are in the field</li>
+        </ul>
+<p>Each location will have a QR code that someone can scan with their phone and use this webpage while they’re walking around on the Answer Plot. 
+I had an old NDVI map of one of my fields in Minnesota to show an example of what I plan on doing. Because this is just normal field I drew on some fake treatment squares (I would also have labels for each treatment). 
+</p>
+  </div>
+  
+  
+    <!-- Your map code  -->
+  <script src="SD_project.js"></script>
+</body>
+</html>
