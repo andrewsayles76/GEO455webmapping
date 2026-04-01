@@ -64,7 +64,7 @@ topPeaks.forEach(function(peak){
         var lat = peak.geometry.coordinates[1];
         var lon = peak.geometry.coordinates[0];
 
-        mymap.setView([lat, lon], 10);
+        mymap.setView([lat, lon], 15);
 
     });
 
@@ -179,7 +179,6 @@ var selection = {
 
 L.control.layers(baseMaps, selection).addTo(mymap);
 
-//--Create a <button>
 
 
 
