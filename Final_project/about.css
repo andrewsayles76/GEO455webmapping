@@ -1,0 +1,15 @@
+/*Style the description panel (overlay box)*/
+#description {
+	font-size: 1rem;
+  font-style: normal;
+  color: white;
+  position: fixed;
+   height: auto;
+  max-width: calc(100vw - 20px);
+  padding: 0 9px;
+  padding-top: 9px;
+  background: rgb(40, 40, 40);
+  border: 1px solid #777;
+  border-radius: 6px;
+  z-index: 800;
+}
