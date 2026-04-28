@@ -72,13 +72,13 @@ fetch('field_maps/South_field_NDVI.tif')
       opacity: 0.8,
       pixelValuesToColorFn: function(values) {
         const v = values[0];
-        if (v === georaster.noDataValue || v === null) return null;
-        if (v >= 0.6)  return '#1a9641';
-        if (v >= 0.4)  return '#74c476';
-        if (v >= 0.2)  return '#a6d96a';
-        if (v >= 0.1)  return '#ffffbf';
-        if (v >= 0.0)  return '#fdae61';
-        return '#d7191c';
+        if (v === georaster.noDataValue || v === null || v === -9999) return null;
+        if (v >= 0.6)  return '#1a9641'; // healthy
+        if (v >= 0.4)  return '#74c476'; // good
+        if (v >= 0.2)  return '#a6d96a'; // moderate
+        if (v >= 0.1)  return '#ffffbf'; // low
+        if (v >= 0.0)  return '#fdae61'; // very low
+        return '#d7191c';                // stressed/bare
       }
     });
     map.fitBounds(rasterLayers['NDVI'].getBounds());
@@ -106,17 +106,18 @@ fetch('field_maps/South_field_pH.tif')
   })
   .catch(err => console.log('pH error:', err));
 
-// Wire up toggles
-document.querySelectorAll('.layer-toggle').forEach(radio => {
-  radio.addEventListener('change', function() {
-    // Remove all raster layers
-    Object.values(rasterLayers).forEach(layer => {
-      if (map.hasLayer(layer)) map.removeLayer(layer);
+// Wire up toggles AFTER both rasters are loaded
+Promise.all([ndviPromise, phPromise]).then(() => {
+  document.querySelectorAll('.layer-toggle').forEach(radio => {
+    radio.addEventListener('change', function() {
+      Object.values(rasterLayers).forEach(layer => {
+        if (map.hasLayer(layer)) map.removeLayer(layer);
+      });
+      const selected = rasterLayers[this.dataset.layer];
+      if (selected) selected.addTo(map);
     });
-    // Add selected one
-    const selected = rasterLayers[this.dataset.layer];
-    if (selected) selected.addTo(map);
   });
+  console.log('Both rasters loaded and toggles ready!');
 });
 
 // add rasters!!! add cloud fetching!!! Grid points for soil sample locations???
