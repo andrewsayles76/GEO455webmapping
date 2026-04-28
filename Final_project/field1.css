@@ -73,6 +73,22 @@ body {
   margin: 0;
 }
 
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+}
+
+.legend-swatch {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
 /* Tab that sticks to the right side */
 .sidebar-tab {
   position: fixed;

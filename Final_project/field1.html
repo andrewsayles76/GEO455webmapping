@@ -31,8 +31,8 @@
     <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
     
   <!-- Make pie chart in legend -->
-  <script src="https://cdn.jsdelivr.net/npm/geotiff"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/georaster"></script>
+<script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
   
 </head>
     
@@ -120,27 +120,11 @@
   <div class="container-fluid">
   <div class="row g-2 py-3">
   
-  <!--Home name (title)-->
-    <h4>Home</h4>
-    
+  
 <!--map selection-->
     <div class="container mt-4 position-relative">
         <div class="row">
-    <!-- Main content: cards on the left -->
-    <div class="col-lg-9">
-      <div class="row g-4">
-    <!-- Card 1 -->
-    <div class="col-md-4"> <!-- go to col-sm-6 if card doesnt fit on screen -->
-      <a href="field1.html" class="text-decoration-none text-dark">
-        <div class="card h-100">
-          <img src="field_maps/ndvi.png" class="card-img-top" alt="Page 1 Snapshot">
-          <div class="card-body">
-            <h5 class="card-title">Field 1</h5>
-            <p class="card-text">Short description of this page.</p>
-          </div>
-        </div>
-      </a>
-    </div>
+
 
     <!-- Repeat for cards 2–9 -->
 </div>
@@ -175,20 +159,53 @@
       </div>
         <!--pie chart-->
         <hr style="border-color: #777">
-        <h5>NDVI Breakdown</h5>
-        <canvas id="NDVIChart"></canvas>
-
-        <hr style="border-color: #777">
-        <h5>pH Breakdown</h5>
-        <canvas id="pHChart"></canvas>
-        <hr style="border-color: #777">
+        <h5>NDVI Legend</h5>
+<div class="ndvi-legend">
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#1a9641"></span> Healthy (≥0.6)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#74c476"></span> Good (0.4-0.6)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#a6d96a"></span> Moderate (0.2-0.4)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#ffffbf"></span> Low (0.1-0.2)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#fdae61"></span> Very Low (0.0-0.1)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#d7191c"></span> Stressed/Bare 
+  </div>
+      </div>
+   <hr style="border-color: #777">
+<h5>Soil pH Legend</h5>
+<div class="ndvi-legend">
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#2166ac"></span> Slightly Alkaline (≥7.2)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#74add1"></span> Neutral High (7.0-7.2)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#abd9e9"></span> Neutral (6.8-7.0)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#ffffbf"></span> Neutral Low (6.6-6.8)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#fdae61"></span> Slightly Acidic (6.4-6.6)
+  </div>
+</div>
+      
       <p>Data Credits: <br> 
       <a href="https://open-meteo.com/en/docs?hourly=temperature_2m,wind_speed_10m,precipitation">Soil Moisture Weather API</a></p>
       </div>
   </div>
   </div>
-    </div>
-</div>
+
 
 <!-- Tab button - only shows on small screens -->
 <button class="sidebar-tab d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#infoSidebar">
