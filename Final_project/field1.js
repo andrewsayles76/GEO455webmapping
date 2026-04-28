@@ -63,7 +63,7 @@ getSoilMoisture();
 var rasterLayers = {};
 
 // Load NDVI
-fetch('field_maps/South_field_NDVI.tif')
+fetch('https://drive.google.com/uc?export=download&id=1cdIyNlt4CoEcSYih-Cjptq2QzBgy9pqq')
   .then(response => response.arrayBuffer())
   .then(arrayBuffer => parseGeoraster(arrayBuffer))
   .then(georaster => {
@@ -73,12 +73,12 @@ fetch('field_maps/South_field_NDVI.tif')
       pixelValuesToColorFn: function(values) {
         const v = values[0];
         if (v === georaster.noDataValue || v === null) return null;
-        if (v >= 0.6)  return '#1a9641'; // healthy
-        if (v >= 0.4)  return '#74c476'; // good
-        if (v >= 0.2)  return '#a6d96a'; // moderate
-        if (v >= 0.1)  return '#ffffbf'; // low
-        if (v >= 0.0)  return '#fdae61'; // very low
-        return '#d7191c';                // stressed/bare
+        if (v >= 0.6)  return '#1a9641';
+        if (v >= 0.4)  return '#74c476';
+        if (v >= 0.2)  return '#a6d96a';
+        if (v >= 0.1)  return '#ffffbf';
+        if (v >= 0.0)  return '#fdae61';
+        return '#d7191c';
       }
     });
     map.fitBounds(rasterLayers['NDVI'].getBounds());
@@ -95,7 +95,7 @@ fetch('field_maps/South_field_pH.tif')
       opacity: 0.8,
       pixelValuesToColorFn: function(values) {
         const v = values[0];
-        if (v === georaster.noDataValue || v === null) return null;
+        if (v === georaster.noDataValue || v === null || v === -9999) return null;
         if (v >= 7.2)  return '#2166ac'; // slightly alkaline
         if (v >= 7.0)  return '#74add1'; // neutral high
         if (v >= 6.8)  return '#abd9e9'; // neutral
@@ -122,3 +122,4 @@ document.querySelectorAll('.layer-toggle').forEach(radio => {
 // add rasters!!! add cloud fetching!!! Grid points for soil sample locations???
 // area of concern?
 //pie chart later
+// add RBG drone imagery

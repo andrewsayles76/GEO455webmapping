@@ -206,7 +206,7 @@
   </div>
   </div>
 
-
+<!--small screens only
 <!-- Tab button - only shows on small screens -->
 <button class="sidebar-tab d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#infoSidebar">
   Crop Data
@@ -223,7 +223,7 @@
       
             <hr style="border-color: #777">
 
-      <!-- Soil Moisture -->
+            <!-- Soil Moisture -->
       <h5>Real Time Soil Moisture (3-9cm)</h5>
       <p id="moisture-value">Loading...</p>
       
@@ -239,13 +239,53 @@
         <input class="form-check-input layer-toggle" type="radio" name="mapLayer" data-layer="pH" id="togglePH">
         <label class="form-check-label" for="radioPH">Soil pH</label>
       </div>
-      
-      <hr style="border-color: #777">
-      
-    <p>Data Credits: <br> 
-      <a href="https://open-meteo.com/en/docs?hourly=temperature_2m,wind_speed_10m,precipitation">Soil Moisture Weather API</a></p>
+        <!--pie chart-->
+        <hr style="border-color: #777">
+        <h5>NDVI Legend</h5>
+<div class="ndvi-legend">
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#1a9641"></span> Healthy (≥0.6)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#74c476"></span> Good (0.4-0.6)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#a6d96a"></span> Moderate (0.2-0.4)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#ffffbf"></span> Low (0.1-0.2)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#fdae61"></span> Very Low (0.0-0.1)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#d7191c"></span> Stressed/Bare 
+  </div>
+      </div>
+   <hr style="border-color: #777">
+<h5>Soil pH Legend</h5>
+<div class="ndvi-legend">
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#2166ac"></span> Slightly Alkaline (≥7.2)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#74add1"></span> Neutral High (7.0-7.2)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#abd9e9"></span> Neutral (6.8-7.0)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#ffffbf"></span> Neutral Low (6.6-6.8)
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch" style="background:#fdae61"></span> Slightly Acidic (6.4-6.6)
   </div>
 </div>
+      
+      <p>Data Credits: <br> 
+      <a href="https://open-meteo.com/en/docs?hourly=temperature_2m,wind_speed_10m,precipitation">Soil Moisture Weather API</a></p>
+      </div>
+  </div>
 
         
       <!-- Map -->
@@ -254,7 +294,7 @@
         <div id="description">
             <h5> Description</h5>
             <p> This is one of many fields that can be analyzed. NDVI, soil pH, and soil moisture allows a user to have deeper knowledge about their land.
-                The blue polygon in overlaying the temporary png (I dont want just png for NDVI + soil pH) was created in the "submit field" tab and brought over via GeoJSON.
+                The blue polygon in overlaying was created in the "submit field" tab and brought over via GeoJSON.
                 User location tool was added so a user can locate troubled locations.
             </p>
   </div>
