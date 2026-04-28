@@ -63,7 +63,7 @@ getSoilMoisture();
 var rasterLayers = {};
 
 // Load NDVI
-fetch('https://drive.google.com/uc?export=download&id=1cdIyNlt4CoEcSYih-Cjptq2QzBgy9pqq')
+fetch('field_maps/South_field_NDVI.tif')
   .then(response => response.arrayBuffer())
   .then(arrayBuffer => parseGeoraster(arrayBuffer))
   .then(georaster => {
