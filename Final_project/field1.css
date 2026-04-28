@@ -72,3 +72,32 @@ body {
 .legend p {
   margin: 0;
 }
+
+/* Tab that sticks to the right side */
+.sidebar-tab {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  background-color: rgb(40, 40, 40);
+  color: white;
+  border: none;
+  padding: 12px 8px;
+  border-radius: 6px 0 0 6px;
+  writing-mode: vertical-rl;
+  cursor: pointer;
+  letter-spacing: 1px;
+  width: fit-content;   
+  height: auto;         
+  display: block;       
+}
+
+
+
+/* Offcanvas styling */
+.offcanvas {
+  background-color: rgb(40, 40, 40);
+  color: white;
+}
+

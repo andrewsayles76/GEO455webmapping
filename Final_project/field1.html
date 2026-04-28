@@ -18,7 +18,7 @@
     <!-- Your CSS -->
   <link rel="stylesheet" href="field1.css" />
   
-    <!-- feild acre too; -->
+    <!-- feild acre tool -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geometryutil/0.10.3/leaflet.geometryutil.min.js"></script>
     
    <!--This is for the home button-->
@@ -27,9 +27,13 @@
    
     
     <!-- Locate Control plugin -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
     
+  <!-- Make pie chart in legend -->
+  <script src="https://cdn.jsdelivr.net/npm/geotiff"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
 </head>
     
 <body class="bg-light">
@@ -38,6 +42,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom sticky-top">
   <div class="container-fluid">
     <span class="navbar-brand fw-semibold">Project GeoCrop</span>
+    <a style="background-color: rgb(40,40,40)"> </a>
     
     <!-- Navbar toggler for mobile (puts dropdowns in a button-->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
@@ -110,6 +115,120 @@
   </div>
 </nav>
 
+  
+    <!-- Page layout -->
+  <div class="container-fluid">
+  <div class="row g-2 py-3">
+  
+  <!--Home name (title)-->
+    <h4>Home</h4>
+    
+<!--map selection-->
+    <div class="container mt-4 position-relative">
+        <div class="row">
+    <!-- Main content: cards on the left -->
+    <div class="col-lg-9">
+      <div class="row g-4">
+    <!-- Card 1 -->
+    <div class="col-md-4"> <!-- go to col-sm-6 if card doesnt fit on screen -->
+      <a href="field1.html" class="text-decoration-none text-dark">
+        <div class="card h-100">
+          <img src="field_maps/ndvi.png" class="card-img-top" alt="Page 1 Snapshot">
+          <div class="card-body">
+            <h5 class="card-title">Field 1</h5>
+            <p class="card-text">Short description of this page.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Repeat for cards 2–9 -->
+</div>
+</div>
+</div>
+</div>
+
+<!-- Desktop sidebar - always visible on large screens -->
+<div id="infoColumn" class="d-none d-lg-block position-absolute top-0 end-0" style="width: 25%; z-index: 10; margin-top: 60px;">
+  <div class="card shadow-sm" style="background-color: rgb(40,40,40)">
+    <div class="card-body" style="color: white">
+      <h5 class="card-title mb-3"><strong>Cropland Data</strong></h5>
+      <p>Total Acres of Field: <span id="acreage-value">Loading...</span></p>
+      
+            <hr style="border-color: #777">
+
+      <!-- Soil Moisture -->
+      <h5>Real Time Soil Moisture (3-9cm)</h5>
+      <p id="moisture-value">Loading...</p>
+      
+         <hr style="border-color: #777">
+      
+      <!-- NDVI + pH legend toggle -->
+      <h5>Map Layers</h5>
+            <div class="form-check">
+        <input class="form-check-input layer-toggle" type="radio" name="mapLayer" data-layer="NDVI" id="toggleNDVI">
+        <label class="form-check-label" for="radioNDVI">NDVI</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input layer-toggle" type="radio" name="mapLayer" data-layer="pH" id="togglePH">
+        <label class="form-check-label" for="radioPH">Soil pH</label>
+      </div>
+        <!--pie chart-->
+        <hr style="border-color: #777">
+        <h5>NDVI Breakdown</h5>
+        <canvas id="NDVIChart"></canvas>
+
+        <hr style="border-color: #777">
+        <h5>pH Breakdown</h5>
+        <canvas id="pHChart"></canvas>
+        <hr style="border-color: #777">
+      <p>Data Credits: <br> 
+      <a href="https://open-meteo.com/en/docs?hourly=temperature_2m,wind_speed_10m,precipitation">Soil Moisture Weather API</a></p>
+      </div>
+  </div>
+  </div>
+    </div>
+</div>
+
+<!-- Tab button - only shows on small screens -->
+<button class="sidebar-tab d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#infoSidebar">
+  Crop Data
+</button>
+
+<!-- Offcanvas - only used on small screens -->
+<div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="infoSidebar">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title" style="color: white"><strong>Cropland Data</strong></h3>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body" style="color: white">
+    <p>Total Acres of Field: <span id="acreage-value">Loading...</span></p>
+      
+            <hr style="border-color: #777">
+
+      <!-- Soil Moisture -->
+      <h5>Real Time Soil Moisture (3-9cm)</h5>
+      <p id="moisture-value">Loading...</p>
+      
+         <hr style="border-color: #777">
+      
+      <!-- NDVI + pH legend toggle -->
+      <h5>Map Layers</h5>
+            <div class="form-check">
+        <input class="form-check-input layer-toggle" type="radio" name="mapLayer" data-layer="NDVI" id="toggleNDVI">
+        <label class="form-check-label" for="radioNDVI">NDVI</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input layer-toggle" type="radio" name="mapLayer" data-layer="pH" id="togglePH">
+        <label class="form-check-label" for="radioPH">Soil pH</label>
+      </div>
+      
+      <hr style="border-color: #777">
+      
+    <p>Data Credits: <br> 
+      <a href="https://open-meteo.com/en/docs?hourly=temperature_2m,wind_speed_10m,precipitation">Soil Moisture Weather API</a></p>
+  </div>
+</div>
 
         
       <!-- Map -->

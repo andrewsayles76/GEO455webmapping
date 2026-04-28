@@ -13,26 +13,6 @@ var map = L.map("map", {
   layers: imagery
 });
 
-// Create legend control
-var legend = L.control({ position: 'bottomright' });
-legend.onAdd = function(map) {
-  var div = L.DomUtil.create('div', 'legend');
-  div.innerHTML = `
-    <h4>NDVI</h4>
-    <p>...</p>
-    <h4>Soil pH</h4>
-    <p>...</p>
-    <h4>Soil Moisture (3-9cm)</h4>
-    <p id="moisture-value">Loading...</p>
-    <hr style="border-color:#777; margin: 6px 0">
-    <h4>Field Info</h4>
-    <p>Acreage: <span id="acreage-value">Loading...</span></p>
-    <hr style="border-color:#777; margin: 6px 0">
-  `;
-  return div;
-};
-legend.addTo(map);
-
 //fetch drawn field GeoJSON // 
 fetch('fields/field1.geojson')
   .then(res => res.json())
@@ -47,21 +27,22 @@ fetch('fields/field1.geojson')
 
 // Define bounds //
 var imageBounds = [
-    [43.60437414576332, -92.91281070055166],  // northwest
-    [43.60172095521328, -92.90878823926458]   // southeast
+  [43.60437414576332, -92.91281070055166],
+  [43.60172095521328, -92.90878823926458]
 ];
 
-// Define each as an imageOverlay layer //
 var NDVI = L.imageOverlay('field_maps/ndvi.png', imageBounds);
-var pH = L.imageOverlay('field_maps/pH.png', imageBounds);              // later add more/all soil sample properties //
+var pH = L.imageOverlay('field_maps/pH.png', imageBounds);
 
-// Then add to layer control // 
-var overlays = {
-  'NDVI': NDVI,
-  'pH': pH,
-};
+// Then your toggle listener
+const layers = { NDVI, pH };
 
-var layerControl = L.control.layers(overlays, null, { collapsed: false }).addTo(map);
+document.querySelectorAll('.layer-toggle').forEach(radio => {
+  radio.addEventListener('change', function() {
+    Object.values(layers).forEach(layer => map.removeLayer(layer));
+    map.addLayer(layers[this.dataset.layer]);
+  });
+});
 
 // Home Button //
 var homeCenter = map.getCenter();
@@ -96,3 +77,124 @@ async function getSoilMoisture() {
   `;
 }
 getSoilMoisture();
+
+
+// pie chart and raster layers
+// Store layers here once loaded
+var rasterLayers = {};
+
+async function loadRaster(name, path, colorFn, categories) {
+  const response = await fetch(path);
+  const arrayBuffer = await response.arrayBuffer();
+  const georaster = await parseGeoraster(arrayBuffer);
+
+  // Add to map
+  rasterLayers[name] = new GeoRasterLayer({
+    georaster: georaster,
+    opacity: 0.7,
+    pixelValuesToColorFn: colorFn
+  });
+
+  // Build pie chart from same data
+  buildPieChart(name, arrayBuffer, categories);
+}
+
+async function buildPieChart(name, arrayBuffer, categories) {
+  const tiff = await GeoTIFF.fromArrayBuffer(arrayBuffer);
+  const image = await tiff.getImage();
+  const data = await image.readRasters();
+  const pixels = data[0];
+
+  // Count pixels per category
+  let counts = new Array(categories.length).fill(0);
+  let noData = 0;
+
+  for (let i = 0; i < pixels.length; i++) {
+    const val = pixels[i];
+    if (val === -9999 || val === 0) { noData++; continue; }
+    for (let c = 0; c < categories.length; c++) {
+      if (val >= categories[c].min && val < categories[c].max) {
+        counts[c]++;
+        break;
+      }
+    }
+  }
+
+  const total = pixels.length - noData;
+  const toPercent = count => ((count / total) * 100).toFixed(1);
+
+  var ctx = document.getElementById(`${name}Chart`).getContext('2d');
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: categories.map((c, i) => `${c.label} ${toPercent(counts[i])}%`),
+      datasets: [{
+        data: counts.map(c => toPercent(c)),
+        backgroundColor: categories.map(c => c.color)
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          labels: { color: 'white', font: { size: 11 } }
+        }
+      }
+    }
+  });
+}
+
+// Load all rasters
+async function loadAllRasters() {
+  await loadRaster(
+    'NDVI',
+    'field_maps/South_field_NDVI.tif',
+    function(values) {
+      const v = values[0];
+      if (v === -9999) return null;
+      if (v >= 0.6)   return '#1a9641';
+      if (v >= 0.3)   return '#a6d96a';
+      if (v >= 0.1)   return '#ffffbf';
+      return '#d7191c';
+    },
+    [
+      { label: 'Healthy (≥0.6)',    min: 0.6,  max: Infinity, color: '#1a9641' },
+      { label: 'Moderate (0.3-0.6)', min: 0.3, max: 0.6,      color: '#a6d96a' },
+      { label: 'Low (0.1-0.3)',      min: 0.1, max: 0.3,      color: '#ffffbf' },
+      { label: 'Bare (<0.1)',        min: -1,  max: 0.1,      color: '#d7191c' }
+    ]
+  );
+
+  await loadRaster(
+    'pH',
+    'field_maps/South_field_pH.tif',
+    function(values) {
+      const v = values[0];
+      if (v === -9999) return null;
+      if (v >= 7)     return '#2166ac';
+      if (v >= 6)     return '#74add1';
+      if (v >= 5)     return '#fdae61';
+      return '#d73027';
+    },
+    [
+      { label: 'Alkaline (≥7)',      min: 7,   max: Infinity, color: '#2166ac' },
+      { label: 'Neutral (6-7)',       min: 6,   max: 7,        color: '#74add1' },
+      { label: 'Slightly Acidic (5-6)', min: 5, max: 6,       color: '#fdae61' },
+      { label: 'Acidic (<5)',         min: -1,  max: 5,        color: '#d73027' }
+    ]
+  );
+
+  // Wire up toggles after rasters loaded
+  document.querySelectorAll('.layer-toggle').forEach(radio => {
+    radio.addEventListener('change', function() {
+      Object.values(rasterLayers).forEach(layer => map.removeLayer(layer));
+      map.addLayer(rasterLayers[this.dataset.layer]);
+    });
+  });
+}
+
+loadAllRasters();
+
+
+// add rasters!!! add cloud fetching!!! Grid points for soil sample locations???
+// area of concern?
+// about tab = need more infor
