@@ -3,9 +3,9 @@ var imagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/
 });
 
 var map = L.map("map", {
-  center: [43.603096138976234, -92.91050094266117],
-  zoom: 17,
-    minZoom: 17,
+  center: [43.599664711586726, -92.91322356817903],
+  zoom: 16,
+    minZoom: 16,
    maxZoom: 18,
     maxBounds: [
     [42.0, -93.0], // southwest corner
@@ -14,23 +14,21 @@ var map = L.map("map", {
   layers: imagery
 });
 
-fetch('fields/field1.geojson')
+fetch('fields/barns_field.geojson')
   .then(res => res.json())
   .then(data => {
     L.geoJSON(data, {
       style: {
-        color: '#0066ff',
-        weight: 2,
-        opacity: 1,
-        fillOpacity: 0
+        color: '#0066ff',      // border color
+        weight: 2,             // border thickness
+        opacity: 1,            // border opacity
+        fillOpacity: 0         // 0 = fully transparent fill
       }
     }).addTo(map);
 
     // Display acreage in legend
     const acres = data.properties?.acres || 'N/A';
-    document.querySelectorAll('.acreage-value').forEach(el => {
-      el.innerHTML = `<b>${acres} acres</b>`;
-    });
+    document.getElementById('acreage-value').innerHTML = `<b>${acres} acres</b>`;
   })
   .catch(err => console.log('No field boundary found'));
 
@@ -50,8 +48,8 @@ L.control.locate().addTo(map);
 // Fetch soil moisture and update legend //                   // !!will need to figure out how to make it so lat and long changes to new polygon //
 async function getSoilMoisture() {
   const url = 'https://api.open-meteo.com/v1/forecast' +
-    '?latitude=43.60437414576332' +
-    '&longitude=-92.91281070055166' +
+    '?latitude=43.60017692190082' +
+    '&longitude=-92.91457387575103' +
     '&hourly=soil_moisture_3_to_9cm' +
     '&timezone=America%2FChicago';
 
@@ -61,12 +59,10 @@ async function getSoilMoisture() {
   const latest = data.hourly.soil_moisture_3_to_9cm[0];
   const time = data.hourly.time[0];
 
-  document.querySelectorAll('.moisture-value').forEach(el => {
-  el.innerHTML = `
+  document.getElementById('moisture-value').innerHTML = `
     <b>${(latest * 100).toFixed(1)}%</b><br>
     <small>As of ${time}</small>
-   `;
-  });
+  `;
 }
 getSoilMoisture();
 
@@ -198,8 +194,10 @@ Promise.all([ndviPromise, phPromise, soilSamplePromise]).then(() => {
 // in depth about tab - change description box in field1
 // soil sample and acres do not load inside of mobile tab
 
+// THINGS TO ADD LATER
 // add DSM for elevation and wet spot detection (need cloud storage and fetch)
 // add RGB (need cloud storage and fetch)
+// add other soil properties 
 
 // ArcGIS Pro notes
 // add GeoJSON to GDB and do JSON to Feature 

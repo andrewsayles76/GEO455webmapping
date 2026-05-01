@@ -6,6 +6,7 @@ var imagery = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/
 var map = L.map("map", {
   center: [43.70511853302355, -91.53441376030487],
   zoom: 7,
+  maxZoom: 16,
   layers: imagery
 });
 
