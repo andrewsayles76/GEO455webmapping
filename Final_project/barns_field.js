@@ -69,52 +69,52 @@ getSoilMoisture();
 var rasterLayers = {};
 
 // Load NDVI - assigned to a variable
-const ndviPromise = fetch('field_maps/South_field_NDVI.tif') //when saveing from ArcGIS Pro save it outside of GDB and add .tif at the end
-  .then(response => response.arrayBuffer())
-  .then(arrayBuffer => parseGeoraster(arrayBuffer))
-  .then(georaster => {
-    rasterLayers['NDVI'] = new GeoRasterLayer({
-      georaster: georaster,
-      opacity: 0.8,
-      resolution: 128,
-      pixelValuesToColorFn: function(values) {
-        const v = values[0];
-        if (v === georaster.noDataValue || v === null || v === -9999) return null;
-        if (v >= 0.6)  return '#1a9641';
-        if (v >= 0.4)  return '#74c476';
-        if (v >= 0.2)  return '#a6d96a';
-        if (v >= 0.1)  return '#ffffbf';
-        if (v >= 0.0)  return '#fdae61';
-        return '#d7191c';
-      }
-    });
-  })
-  .catch(err => console.log('NDVI error:', err));
+//const ndviPromise = fetch('field_maps/barns_field_NDVI.tif') //when saveing from ArcGIS Pro save it outside of GDB and add .tif at the end
+//  .then(response => response.arrayBuffer())
+//  .then(arrayBuffer => parseGeoraster(arrayBuffer))
+//  .then(georaster => {
+//    rasterLayers['NDVI'] = new GeoRasterLayer({
+//      georaster: georaster,
+//      opacity: 0.8,
+//      resolution: 128,
+//      pixelValuesToColorFn: function(values) {
+//        const v = values[0];
+//        if (v === georaster.noDataValue || v === null || v === -9999) return null;
+//        if (v >= 0.6)  return '#1a9641';
+//        if (v >= 0.4)  return '#74c476';
+//        if (v >= 0.2)  return '#a6d96a';
+//        if (v >= 0.1)  return '#ffffbf';
+//        if (v >= 0.0)  return '#fdae61';
+//        return '#d7191c';
+//    }
+//   });
+//  })
+//  .catch(err => console.log('NDVI error:', err));
 
 // Load pH - assigned to a variable
-const phPromise = fetch('field_maps/South_field_pH.tif') //when saveing from ArcGIS Pro save it outside of GDB and add .tif at the end
-  .then(response => response.arrayBuffer())
-  .then(arrayBuffer => parseGeoraster(arrayBuffer))
-  .then(georaster => {
-    rasterLayers['pH'] = new GeoRasterLayer({
-      georaster: georaster,
-      opacity: 0.8,
-      resolution: 128,
-      pixelValuesToColorFn: function(values) {
-        const v = values[0];
-        if (v === georaster.noDataValue || v === null || v === -9999) return null;
-        if (v >= 7.2)  return '#2166ac';
-        if (v >= 7.0)  return '#74add1';
-        if (v >= 6.8)  return '#abd9e9';
-        if (v >= 6.6)  return '#ffffbf';
-        return '#fdae61';
-      }
-    });
-  })
-  .catch(err => console.log('pH error:', err));
+//const phPromise = fetch('field_maps/barns_field_pH.tif') //when saveing from ArcGIS Pro save it outside of GDB and add .tif at the end
+//  .then(response => response.arrayBuffer())
+//  .then(arrayBuffer => parseGeoraster(arrayBuffer))
+//  .then(georaster => {
+//    rasterLayers['pH'] = new GeoRasterLayer({
+//      georaster: georaster,
+//      opacity: 0.8,
+//      resolution: 128,
+//      pixelValuesToColorFn: function(values) {
+//        const v = values[0];
+///        if (v === georaster.noDataValue || v === null || v === -9999) return null;
+//        if (v >= 7.2)  return '#2166ac';
+//        if (v >= 7.0)  return '#74add1';
+ //       if (v >= 6.8)  return '#abd9e9';
+  //      if (v >= 6.6)  return '#ffffbf';
+    //    return '#fdae61';
+    //  }
+    //});
+  //})
+  //.catch(err => console.log('pH error:', err));
 
 // Load soil sample locations
-const soilSamplePromise = fetch('field_maps/soil_sample_locations.geojson')
+const soilSamplePromise = fetch('field_maps/barns_soil_sample_locations.geojson')
   .then(res => res.json())
   .then(data => {
     rasterLayers['soilSamples'] = L.geoJSON(data, {
@@ -145,18 +145,18 @@ const soilSamplePromise = fetch('field_maps/soil_sample_locations.geojson')
 //  })
 //  .catch(err => console.log('RGB error:', err));
 
-Promise.all([ndviPromise, phPromise, soilSamplePromise]).then(() => {
-  rasterLayers['NDVI'].addTo(map);
-  rasterLayers['pH'].addTo(map);
+Promise.all([soilSamplePromise]).then(() => {           // add ndviPromise and phPromise back
+//  rasterLayers['NDVI'].addTo(map);
+//  rasterLayers['pH'].addTo(map);
   rasterLayers['soilSamples'].addTo(map);
 
-  rasterLayers['pH'].getContainer().style.display = 'none';
+//  rasterLayers['pH'].getContainer().style.display = 'none';
     // Hide soil samples using Leaflet's remove instead
   map.removeLayer(rasterLayers['soilSamples']);              // how can i remove soil samples (only on when you toggle)
  
 
-  document.getElementById('toggleNDVI-desktop').checked = true;
-  document.getElementById('toggleNDVI-mobile').checked = true;
+//  document.getElementById('toggleNDVI-desktop').checked = true;
+//  document.getElementById('toggleNDVI-mobile').checked = true;
 
   document.querySelectorAll('.layer-toggle').forEach(radio => {
     radio.addEventListener('change', function() {

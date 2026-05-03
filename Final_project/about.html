@@ -107,23 +107,23 @@
             </p>
       <hr style="border-color: #777">
             <h5> Where to Start?</h5>
-            <p>
-              Start by selecting the "Submit a Field" in the navigation bar. 
-              This will bring you to a site where you can create a polygon around a single cropland using the tools on the left hand side of the screen.
-              After creating your field polygon you can select finish also found on the left. 
-              Then a pop-up will appear asking you to name your selected field.
-              The created polygon is now downloaded with your given name.
-              Next you would send that downloaded file to me then I would perform my services.</p>
+            <ul> 
+              <li>Start by selecting the "Submit a Field" in the navigation bar. </li>
+              <li> This will bring you to a site where you can create a polygon around a single cropland using the tools on the left hand side of the screen. </li>
+             <li> After creating your field polygon you can select finish also found on the left. </li>
+              <li>Then a pop-up will appear asking you to name your selected field.</li>
+             <li> The created polygon is now downloaded with your given name.</li>
+              <li>Next you would send that downloaded file to me then I would perform my services.</li>       
               <ul>
                 <li>Soil Sampling</li>
                 <li>Drone Imagry/Analysis</li>
                 <li>Cropland Service Recommendations</li>
-              </ul>
-            <p>
-              These services will be found and uploaded as individual fields. 
-              Your field (once uploaded) can be found within the "Home" or "Properties" tab.
-              Soil sample data, Drone imagery/analysis, soil moisture and field size (acres) will all be determined and presented within the individual field page.
-            </p>
+              </ul></ul>
+            <ul>
+              <li>These services will be found and uploaded as individual fields. </li>
+              <li>Your field (once uploaded) can be found within the "Home" or "Properties" tab.</li>
+              <li>Soil sample data, Drone imagery/analysis, soil moisture and field size (acres) will all be determined and presented within the individual field page.</li>
+            </ul>
        <hr style="border-color: #777">
              <h5> What to do with this Information?</h5>
               <p>
@@ -133,10 +133,41 @@
                 Drone NDVI (Normalized Difference Vegetation Index) analysis will show plant health through a unseen spectrum of light - providing a advanced aproach to crop scouting and early detection.
                 Soil moisture data and field area (acres) will be present for the entire field.
               </p>
+            <hr style="border-color: #777">
+             <h5>Data Credits:</h5>
+                <p><a href="https://open-meteo.com/en/docs?hourly=temperature_2m,wind_speed_10m,precipitation">Soil Moisture Weather API</a></p>
+                <ul>
+                  <li>This is the source of soil moisture data</li>
+                </ul>
+            <hr style="border-color: #777">
+              <h5>Methods</h5>
+              <ul>
+                <li>Collect/gather data - Drone Imagery, Soil Sample data, Soil moisture data, and use "Submit Field" tool to gather GeoJSON</li>
+                <li>Start processing drone imagerying to collect NDVI</li>
+                <li>Bring Drone Imagery product, GeoJSON, and Soil Sample data into ArcGIS Pro</li>
+                  <ul>
+                    <li>Clip Drone Imagery to GeoJSON Field Boundery</li>
+                    <li>Use GeoJSON and fishnet tool to generate Soil Sample locaitons</li>
+                    <li>Join Soil Sample locations to Soil Sample data</li>
+                  </ul>
+                <li>Export rasters and vectors into a folder and upload the files to GitHub</li>
+                <li>Update coordinates for Soil Moisture API</li>
+              </ul>
+                <img src="final_workflow.png" alt="final workflow of project" style="width: 100%; border-radius: 6px; margin: 10px 0;">
+          <hr style="border-color: #777">
+            <h5>Limitations:</h5>
+              <p>Processing large raster files such as NDVI take time and cannot be supported by GitHub (file size limited to 25MB). 
+                  I will need to learn more about cloud storage and fetching to fully demostrate this idea. This project also relies on ArcGIS Pro and Pix4D
+                  for processing data. Without these softwares the dataset would not be complete.
+              </p>
+            <h5>Author Credits:</h5>
+              <p>Webmap made by: Andrew Sayles</p>
+            <h5>Basemap Attributions:</h5>
+              <p>'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'</p>
         <hr style="border-color: #777">
             <h5>Questions Regarding this Webpage?</h5>
             <p>
-              Contact me at: andrewsayles@gmail.com
+              Contact me at: andrewsayles76@gmail.com
             </p>
   </div>
     
