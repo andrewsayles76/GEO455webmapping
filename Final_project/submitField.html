@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Project GeoCrop</title>
+  <title>GeoCrop</title>
    
 <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -31,7 +31,7 @@
        <!-- Top bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom sticky-top">
   <div class="container-fluid">
-    <span class="navbar-brand fw-semibold">Project GeoCrop</span>
+    <span class="navbar-brand fw-semibold">GeoCrop</span>
     
     <!-- Navbar toggler for mobile (puts dropdowns in a button-->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
@@ -117,17 +117,18 @@
       </div>
     
         <div id="description">
-            <h5> What is This?</h5>
+            <h6> What is This?</h6>
             <p> This is a tool to determine field locations and size. 
                 Field locations must be identified to properly perfrom analysis.
             </p>
-    <h5>Where to Start:</h5>
+    <h6>Where to Start:</h6>
     
-     <p> To create a field boundery select the pentagon symbol on the left hand side of the screen. 
-         Locate field on the map and click around the outside of the field. Editing tools are provided.
-         After field is drawn out select finish on the next to the pentagon. Now give the field a name.
-         Ending with a custom GeoJSON of the field that can be submitted.
-    </p>
+     <ul>
+       <li>Select the pentagon tool on the left side of the screen.</li>
+       <li>Click around the outside of your field to draw the boundary.</li>
+       <li>Select finish, then give your field a name.</li>
+       <li>Your field will download as a GeoJSON ready to submit.</li>
+     </ul>
   </div>
     
  <script src="submitField.js"></script>   

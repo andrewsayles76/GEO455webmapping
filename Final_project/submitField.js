@@ -3,6 +3,11 @@ var imagery = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/
 	attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
 });
 
+var streets = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+});
+
 var map = L.map("map", {
   center: [43.70511853302355, -91.53441376030487],
   zoom: 7,
@@ -54,3 +59,13 @@ map.on(L.Draw.Event.CREATED, function(e) {
   // Show acreage in an alert
   alert(`Field area: ${acres} acres`);
 });
+
+/* Layer control and Menu Item */
+var baseLayers = {
+    'Satellite Imagery': imagery,
+    'Streetmap': streets,
+        };
+
+var overlays = {};
+
+var layerControl = L.control.layers(baseLayers, overlays, {collapsed: false}).addTo(map);
