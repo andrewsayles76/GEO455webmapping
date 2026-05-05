@@ -84,10 +84,10 @@ const ndviPromise = fetch('field_maps/South_field_NDVI.tif') //when saveing from
       pixelValuesToColorFn: function(values) {
         const v = values[0];
         if (v === georaster.noDataValue || v === null || v === -9999) return null;
-        if (v >= 0.6)  return '#1a9641';
-        if (v >= 0.4)  return '#74c476';
-        if (v >= 0.2)  return '#a6d96a';
-        if (v >= 0.1)  return '#ffffbf';
+        if (v >= 0.7)  return '#1a9641';
+        if (v >= 0.5)  return '#74c476';
+        if (v >= 0.3)  return '#f1ffa4';
+        if (v >= 0.1)  return '#ffff2d';
         if (v >= 0.0)  return '#fdae61';
         return '#d7191c';
       }
